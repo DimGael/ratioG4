@@ -8,6 +8,7 @@ public class Ratio {
     private int ratioPourcentage;
     private int nbVictoire;
     private int nbDefaite;
+    private long id;
 
     public int getNbDefaite() {
         return nbDefaite;
@@ -17,8 +18,9 @@ public class Ratio {
         this.nbVictoire=nbVictoire;
         this.nbDefaite=nbDefaite;
         this.ratioPourcentage=100 *this.nbVictoire / (this.nbDefaite+this.nbVictoire);
-
     }
+
+    public Ratio(){}
 
     public int getRatio(){
         return ratioPourcentage;
@@ -34,5 +36,13 @@ public class Ratio {
 
     public void setNbDefaite(int nbDefaite) {
         this.nbDefaite = nbDefaite;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
