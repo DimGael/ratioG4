@@ -7,7 +7,7 @@
     tools:context="com.android.unilim.ratiog4.ratiog4.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bouton_ajouter_jeu"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginBottom="36dp"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/bouton_ajouter_jeu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
