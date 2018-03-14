@@ -13,8 +13,7 @@ public class Jeu {
         this.nom = nom;
     }
 
-    public Jeu() {
-    }
+    public Jeu() {}
 
     public long getId() {
         return id;
@@ -30,5 +29,10 @@ public class Jeu {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    @Override
+    public String toString(){
+        return "Jeu["+this.nom+"]";
     }
 }
