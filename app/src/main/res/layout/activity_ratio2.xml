@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.unilim.ratiog4.ratiog4.MainActivity">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_column="0"
+            android:layout_row="0"
+            android:text="Victoires"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_column="2"
+            android:layout_row="0"
+            android:text="Défaites"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/bouton_ajouterWin"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:text="+" />
+
+        <TextView
+            android:id="@+id/TextViewVictoires"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:background="#5eff00"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/bouton_enleverWin"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/bouton_ajouterLose"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:text="+" />
+
+        <TextView
+            android:id="@+id/TextViewDefaites"
+            android:layout_column="2"
+            android:layout_row="2"
+            android:background="#ff0000"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/bouton_enleverLose"
+            android:layout_column="2"
+            android:layout_row="3"
+            android:text="-" />
+    </GridLayout>
+</android.support.constraint.ConstraintLayout>
