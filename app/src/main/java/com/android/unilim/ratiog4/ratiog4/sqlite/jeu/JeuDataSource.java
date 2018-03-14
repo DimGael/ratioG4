@@ -74,4 +74,8 @@ public class JeuDataSource {
        return new Jeu(cursor.getInt(JeuxSQLiteOpenHelper.NUM_COLONNE_ID),
                 cursor.getString(JeuxSQLiteOpenHelper.NUM_COLONNE_NOM));
     }
+
+    public void supprimerAllJeux(){
+        this.database.delete(JeuxSQLiteOpenHelper.TABLE_JEU, null, null);
+    }
 }
