@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.R;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
@@ -48,7 +51,16 @@ public class JeuAdapter extends BaseAdapter {
 
         convertView = layoutInflater.inflate(R.layout.ligne_jeu, null);
 
+        TextView titre_jeu = (TextView)convertView.findViewById(R.id.titre_jeu);
+        titre_jeu.setText(jeu.getNom());
 
+        Button boutonJeu = (Button)convertView.findViewById(R.id.button_jeu);
+        boutonJeu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Vous avez cliqué sur le jeu "+jeu.getNom() , Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
