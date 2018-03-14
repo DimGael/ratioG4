@@ -66,7 +66,6 @@ public class JeuAdapter extends BaseAdapter {
                 jeuDataSource.supprimerJeu(jeu);
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
-                context.
                 jeuDataSource.close();
 
             }
