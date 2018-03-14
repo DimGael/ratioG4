@@ -7,7 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class JeuDataSource {
 
@@ -33,10 +33,10 @@ public class JeuDataSource {
         this.helper.close();
     }
 
-    public Collection<Jeu> getAllJeux(){
+    public List<Jeu> getAllJeux(){
         Cursor cursor = this.database.query(JeuxSQLiteOpenHelper.TABLE_JEU, allColumns, null, null, null, null, null);
 
-        Collection<Jeu> listeJeux = new ArrayList<Jeu>();
+        List<Jeu> listeJeux = new ArrayList<Jeu>();
         while (cursor.moveToNext()) {
             listeJeux.add(creerJeu(cursor));
         }

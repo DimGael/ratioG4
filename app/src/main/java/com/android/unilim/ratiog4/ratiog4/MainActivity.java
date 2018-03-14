@@ -2,10 +2,13 @@ package com.android.unilim.ratiog4.ratiog4;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.ListView;
 
+import com.android.unilim.ratiog4.ratiog4.sqlite.JeuAdapter;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
+
+import java.util.List;
 
 /**
  * Created by dimga on 14/03/2018.
@@ -23,20 +26,11 @@ public class MainActivity extends AppCompatActivity {
         jeuDataSource = new JeuDataSource(this);
         jeuDataSource.open();
 
-        Jeu jeu1 = new Jeu();
-        jeu1.setNom("Fortnite");
-
-        Jeu jeu2 = new Jeu();
-        jeu2.setNom("COUCOU");
-
-        jeuDataSource.ajouterJeu(jeu1);
-        jeuDataSource.ajouterJeu(jeu2);
-
-        for(Jeu jeu : jeuDataSource.getAllJeux()){
-            Log.d("Affichage jeu", jeu.toString());
-        }
+        List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
 
+        final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
+        viewJeux.setAdapter(new JeuAdapter(this, jeux));
     }
 
     @Override
