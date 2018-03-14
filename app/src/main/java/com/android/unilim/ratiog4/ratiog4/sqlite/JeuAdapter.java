@@ -1,6 +1,7 @@
 package com.android.unilim.ratiog4.ratiog4.sqlite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.unilim.ratiog4.ratiog4.MainActivity;
 import com.android.unilim.ratiog4.ratiog4.R;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
+import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 
 import java.util.List;
 
@@ -54,11 +57,18 @@ public class JeuAdapter extends BaseAdapter {
         TextView titre_jeu = (TextView)convertView.findViewById(R.id.titre_jeu);
         titre_jeu.setText(jeu.getNom());
 
-        Button boutonJeu = (Button)convertView.findViewById(R.id.button_supprimer);
+        final Button boutonJeu = (Button)convertView.findViewById(R.id.button_supprimer);
         boutonJeu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Vous avez cliqué sur le jeu "+jeu.getNom() , Toast.LENGTH_SHORT).show();
+                final JeuDataSource jeuDataSource = new JeuDataSource(context);
+                jeuDataSource.open();
+                jeuDataSource.supprimerJeu(jeu);
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                context.
+                jeuDataSource.close();
+
             }
         });
 
