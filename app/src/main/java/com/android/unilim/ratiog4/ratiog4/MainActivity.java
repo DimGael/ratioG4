@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.android.unilim.ratiog4.ratiog4.sqlite.JeuAdapter;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 

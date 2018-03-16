@@ -1,4 +1,4 @@
-package com.android.unilim.ratiog4.ratiog4.sqlite;
+package com.android.unilim.ratiog4.ratiog4;
 
 import android.content.Context;
 import android.content.Intent;
