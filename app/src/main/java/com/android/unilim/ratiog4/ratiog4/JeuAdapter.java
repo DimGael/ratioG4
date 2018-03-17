@@ -1,17 +1,16 @@
 package com.android.unilim.ratiog4.ratiog4;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.unilim.ratiog4.ratiog4.MainActivity;
-import com.android.unilim.ratiog4.ratiog4.R;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 
@@ -23,14 +22,16 @@ import java.util.List;
 
 public class JeuAdapter extends BaseAdapter {
 
-    private List<Jeu> jeux;
-    private Context context;
-    private LayoutInflater layoutInflater;
+    private final List<Jeu> jeux;
+    private final Context context;
+    private final LayoutInflater layoutInflater;
+    private final ListView listView;
 
-    public JeuAdapter(Context context, List<Jeu> jeux){
+    public JeuAdapter(Context context, List<Jeu> jeux, ListView viewJeux){
         this.context = context;
         this.jeux = jeux;
         this.layoutInflater = LayoutInflater.from(context);
+        this.listView = viewJeux;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class JeuAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final Jeu jeu = this.jeux.get(position);
 
         convertView = layoutInflater.inflate(R.layout.ligne_jeu, null);
@@ -61,13 +62,25 @@ public class JeuAdapter extends BaseAdapter {
         boutonJeu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final JeuDataSource jeuDataSource = new JeuDataSource(context);
-                jeuDataSource.open();
-                jeuDataSource.supprimerJeu(jeu);
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
-                jeuDataSource.close();
 
+                new AlertDialog.Builder(context)
+                        .setCancelable(true)
+                        .setTitle("Suppression de "+jeu.getNom())
+                        .setMessage("Êtes vous sûr de vouloir supprimer "+jeu.getNom()+" ?\n(Tous les ratios associés vont être supprimés)")
+                        .setNegativeButton("Annuler", null)
+                        .setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                final JeuDataSource jeuDataSource = new JeuDataSource(context);
+                                jeuDataSource.open();
+                                jeuDataSource.supprimerJeu(jeu);
+                                jeux.remove(position);
+
+                                listView.setAdapter(new JeuAdapter(context, jeux, listView));
+
+                                jeuDataSource.close();
+                            }
+                        }).create().show();
             }
         });
 
