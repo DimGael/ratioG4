@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
@@ -71,6 +72,8 @@ public class JeuAdapter extends BaseAdapter {
                         .setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+
+                                Toast.makeText(context, jeu.getNom()+" supprimé", Toast.LENGTH_SHORT).show();
                                 final JeuDataSource jeuDataSource = new JeuDataSource(context);
                                 jeuDataSource.open();
                                 jeuDataSource.supprimerJeu(jeu);

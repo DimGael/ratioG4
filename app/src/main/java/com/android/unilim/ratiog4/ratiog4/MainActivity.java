@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         jeuDataSource = new JeuDataSource(this);
         jeuDataSource.open();
 
-        jeuDataSource.ajouterJeu(new Jeu(0, "Fortnite"));
-        jeuDataSource.ajouterJeu(new Jeu(0, "Rocket League"));
-
         List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
         final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
@@ -38,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final Button bouton_ajouter_jeu = (Button)findViewById(R.id.bouton_ajouter_jeu);
         bouton_ajouter_jeu.setOnClickListener(this);
-
     }
 
     @Override
