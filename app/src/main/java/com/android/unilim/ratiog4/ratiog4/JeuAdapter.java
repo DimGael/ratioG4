@@ -79,7 +79,7 @@ public class JeuAdapter extends BaseAdapter {
                                 jeuDataSource.supprimerJeu(jeu);
                                 jeux.remove(position);
 
-                                listView.setAdapter(new JeuAdapter(context, jeux, listView));
+                                listView.setAdapter(JeuAdapter.this);
 
                                 jeuDataSource.close();
                             }

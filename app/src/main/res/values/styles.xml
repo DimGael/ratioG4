@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="boutonPlus">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">#26ce00</item>
+    </style>
+
+    <style name="boutonMoins">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">#da0000</item>
+    </style>
+
+    <style name="TextViewWinLose">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">#000000</item>
+        <item name="android:width">80dp</item>
+    </style>
+
+
 </resources>
