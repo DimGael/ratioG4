@@ -15,6 +15,11 @@ public class Jeu {
 
     public Jeu() {}
 
+    public Jeu(String nom){
+        this.nom=nom;
+        this.id=-1;
+    }
+
     public long getId() {
         return id;
     }

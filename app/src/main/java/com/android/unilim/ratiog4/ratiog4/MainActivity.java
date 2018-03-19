@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bouton_ajouter_jeu :
                 final Intent intentAjouterJeu = new Intent(MainActivity.this, AjouterJeuActivity.class);
                 this.startActivity(intentAjouterJeu);
-                this.finish();
                 break;
         }
     }
