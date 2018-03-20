@@ -7,26 +7,85 @@
     tools:context="com.android.unilim.ratiog4.ratiog4.Planning">
 
 
-
-
-    <GridView
-        android:id="@+id/grille"
-        android:layout_width="304dp"
-        android:layout_height="324dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:columnWidth="150dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:columnCount="7"
+        android:rowCount="1"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293">
 
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </GridView>
+            android:id="@+id/lundi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="0"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/mardi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="1"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/mercredi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="2"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/jeudi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="3"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/vendredi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="4"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/samedi"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="5"
+            android:layout_row="0" />
+
+        <ListView
+            android:id="@+id/dimanche"
+            android:layout_width="50dp"
+            android:layout_height="420dp"
+            android:layout_column="6"
+            android:layout_row="0" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/retour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
