@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">RatioG4</string>
     <string name="retour">Retour</string>
+
+    <!-- Page Modifier Ratio -->
+    <string name="titreVictoire">Win</string>
+    <string name="titreDefaites">Lose</string>
+    <string name="TextBoutonPlus">+</string>
+    <string name="TextBoutonMoins">-</string>
+    <string name="bouton_creer_ratio">NOUVEAU RATIO</string>
+    <string name="bouton_stats">STATISTIQUES</string>
 </resources>

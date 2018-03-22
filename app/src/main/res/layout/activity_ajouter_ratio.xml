@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.android.unilim.ratiog4.ratiog4.MainActivity">
+    android:layout_height="match_parent">
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -25,63 +24,57 @@
         <TextView
             android:layout_column="0"
             android:layout_row="0"
-            android:text="Victoires"
+            android:text="@string/titreVictoire"
             android:textSize="35sp" />
 
         <TextView
             android:layout_column="2"
             android:layout_row="0"
-            android:text="Défaites"
+            android:text="@string/titreDefaites"
             android:textSize="35sp" />
 
         <Button
             android:id="@+id/bouton_ajouterWin"
+            style="@style/gridElements"
             android:layout_column="0"
             android:layout_row="1"
-            android:layout_gravity="center"
-            android:text="+"
-            style="@style/boutonPlus" />
+            android:text="@string/TextBoutonPlus" />
 
         <TextView
             android:id="@+id/TextViewVictoires"
+            style="@style/nbWinLose"
             android:layout_column="0"
-            android:text="0"
-            android:layout_gravity="center"
             android:layout_row="2"
-            style="@style/TextViewWinLose"
+            android:background="#5eff00"
             android:textAlignment="center" />
 
         <Button
             android:id="@+id/bouton_enleverWin"
+            style="@style/gridElements"
             android:layout_column="0"
             android:layout_row="3"
-            android:layout_gravity="center"
-            android:text="-"
-            style="@style/boutonMoins" />
+            android:text="@string/TextBoutonMoins" />
 
         <Button
             android:id="@+id/bouton_ajouterLose"
+            style="@style/gridElements"
             android:layout_column="2"
             android:layout_row="1"
-            android:layout_gravity="center"
-            style="@style/boutonPlus"
-            android:text="+" />
+            android:text="@string/TextBoutonPlus" />
 
         <TextView
             android:id="@+id/TextViewDefaites"
+            style="@style/nbWinLose"
             android:layout_column="2"
             android:layout_row="2"
-            android:text="0"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            style="@style/TextViewWinLose" />
+            android:background="#ff0000"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/bouton_enleverLose"
+            style="@style/gridElements"
             android:layout_column="2"
-            android:layout_gravity="center"
             android:layout_row="3"
-            android:text="-"
-            style="@style/boutonMoins"/>
+            android:text="@string/TextBoutonMoins" />
     </GridLayout>
 </android.support.constraint.ConstraintLayout>

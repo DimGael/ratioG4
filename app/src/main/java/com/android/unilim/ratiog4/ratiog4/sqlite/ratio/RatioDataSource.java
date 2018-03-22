@@ -9,7 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class RatioDataSource {
@@ -39,7 +41,7 @@ public class RatioDataSource {
         this.helper.close();
     }
 
-    public List<Ratio> getAllJeux(){
+    public List<Ratio> getAllRatio(){
         Cursor cursor = this.database.query(RatioSQLiteOpenHelper.TABLE_NOM, allColumns, null, null, null, null, null);
 
         List<Ratio> listeJeux = new ArrayList<Ratio>();
@@ -76,7 +78,7 @@ public class RatioDataSource {
        return new Ratio(cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_ID),
                 cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_NB_VICTOIRES),
                 cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_NB_DEFAITES),
-                new Date(),
+                recupDate(cursor.getString(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_DATE))),
                 cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_ID_JEU)
        );
     }
@@ -86,12 +88,27 @@ public class RatioDataSource {
     }
 
     //Retourne un Objet à partir du String date
-    private Date recupDate(String date){
-        return null;
-    }
+    private Date recupDate(String str){
+        Calendar calendar = GregorianCalendar.getInstance();
+        final int year = Integer.parseInt(str.split(" ")[5]);
+        final int day = Integer.parseInt(str.split(" ")[2]);
 
-    //Retourne la date en String à partir de l'objet date
-    private String recupDateString(Date date){
-        return null;
+        final String[] hms = str.split(" ")[3].split(":");
+
+        final String[] months = new String[] {
+                "Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        };
+
+        final String month = str.split(" ")[1];
+        int monthNumber = -1;
+
+        for(int i = 0; i<months.length; i++){
+            if(month.equals(months[i]))
+                monthNumber = i;
+        }
+
+        calendar.set(year, monthNumber, day, Integer.parseInt(hms[0]), Integer.parseInt(hms[1]), Integer.parseInt(hms[2]));
+
+        return calendar.getTime();
     }
 }
