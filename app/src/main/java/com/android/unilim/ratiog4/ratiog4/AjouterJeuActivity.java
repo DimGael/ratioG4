@@ -59,6 +59,7 @@ public class AjouterJeuActivity extends AppCompatActivity implements View.OnClic
         else{
             jeuDataSource.ajouterJeu(new Jeu(this.ajouterJeu.getText().toString()));
             // REDIRECTION VERS PAGE PRINCIPALE A FAIRE
+            finish();
         }
     }
 }

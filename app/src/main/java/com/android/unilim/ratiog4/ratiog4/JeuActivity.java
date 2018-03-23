@@ -15,7 +15,7 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_jeu);
 
-        final Button bon
+
     }
 
     @Override

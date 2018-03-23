@@ -59,6 +59,13 @@ public class JeuAdapter extends BaseAdapter {
         TextView titre_jeu = (TextView)convertView.findViewById(R.id.titre_jeu);
         titre_jeu.setText(jeu.getNom());
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
         final Button boutonJeu = (Button)convertView.findViewById(R.id.button_supprimer);
         boutonJeu.setOnClickListener(new View.OnClickListener() {
             @Override

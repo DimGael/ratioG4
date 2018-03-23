@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         jeuDataSource = new JeuDataSource(this);
         jeuDataSource.open();
-        jeuDataSource.ajouterJeu(new Jeu(1,"coucou"));
-        jeuDataSource.ajouterJeu(new Jeu(2,"un jeu un peu long"));
         List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
         final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
@@ -48,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onResume(){
         super.onResume();
         this.jeuDataSource.open();
+
+        List<Jeu> jeux = this.jeuDataSource.getAllJeux();
+
+        final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
+        viewJeux.setAdapter(new JeuAdapter(this, jeux, viewJeux));
     }
 
     @Override
