@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,9 @@ public class JeuAdapter extends BaseAdapter {
 
         TextView titre_jeu = (TextView)convertView.findViewById(R.id.titre_jeu);
         titre_jeu.setText(jeu.getNom());
+
+        ImageView imageView=(ImageView)convertView.findViewById(R.id.image_jeu);
+        imageView.setImageURI(jeu.getUri_image());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

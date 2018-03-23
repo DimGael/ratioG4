@@ -1,11 +1,13 @@
 package com.android.unilim.ratiog4.ratiog4;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +25,14 @@ public class AjouterJeuActivity extends AppCompatActivity implements View.OnClic
 
     private JeuDataSource jeuDataSource;
     private EditText ajouterJeu;
+    private ImageView imgView;
+    private Uri imageUri;
+    private static int RESULT_LOAD_IMAGE;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_ajouter_jeu);
-
+        RESULT_LOAD_IMAGE=1;
         jeuDataSource = new JeuDataSource(this);
         jeuDataSource.open();
 
@@ -35,8 +40,11 @@ public class AjouterJeuActivity extends AppCompatActivity implements View.OnClic
 
 
         final Button insertion = (Button)findViewById(R.id.insertion);
+        final Button image = (Button)findViewById(R.id.image);
+        imgView=(ImageView)findViewById(R.id.imageView);
         ajouterJeu =(EditText)findViewById(R.id.ajouter_jeu);
         insertion.setOnClickListener(this);
+        image.setOnClickListener(this);
     }
 
     @Override
@@ -53,13 +61,37 @@ public class AjouterJeuActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if(this.ajouterJeu.getText().toString().equals("") || this.ajouterJeu.getText()==null){
-            Toast.makeText(this, "jeu vide", Toast.LENGTH_SHORT).show();
+        switch (view.getId()) {
+            case R.id.insertion :
+                if (this.ajouterJeu.getText().toString().equals("") || this.ajouterJeu.getText() == null || this.imageUri==null) {
+                    Toast.makeText(this, "jeu non valide", Toast.LENGTH_SHORT).show();
+                } else {
+                    jeuDataSource.ajouterJeu(new Jeu(-1,this.ajouterJeu.getText().toString(),this.imageUri));
+                    // REDIRECTION VERS PAGE PRINCIPALE A FAIRE
+                    finish();
+                    Toast.makeText(this, "jeu inséré", Toast.LENGTH_SHORT).show();
+                }
+            break;
+
+            case R.id.image :
+                Toast.makeText(this, "coucou", Toast.LENGTH_SHORT).show();
+                Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
+                gallery.setType("image/*");
+                startActivityForResult(gallery, RESULT_LOAD_IMAGE);
+
+                break;
         }
-        else{
-            jeuDataSource.ajouterJeu(new Jeu(this.ajouterJeu.getText().toString()));
-            // REDIRECTION VERS PAGE PRINCIPALE A FAIRE
-            finish();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK){
+            imageUri = data.getData();
+            imgView.setImageURI(imageUri);
+
         }
     }
 }

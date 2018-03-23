@@ -44,13 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onResume(){
-        super.onResume();
+
         this.jeuDataSource.open();
 
         List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
         final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
         viewJeux.setAdapter(new JeuAdapter(this, jeux, viewJeux));
+        super.onResume();
     }
 
     @Override

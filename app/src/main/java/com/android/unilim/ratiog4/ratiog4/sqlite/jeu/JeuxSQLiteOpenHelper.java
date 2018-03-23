@@ -15,7 +15,7 @@ public class JeuxSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String COLONNE_ID = "_idJeu";
     public static final String COLONNE_NOM = "nomJeu";
-    public static final String COLONNE_IMG = "uriimg";
+    public static final String COLONNE_IMG = "uri";
 
     public static final int NUM_COLONNE_ID = 0;
     public static final int NUM_COLONNE_NOM = 1;
@@ -23,7 +23,7 @@ public class JeuxSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_CREATE = "create table "+ TABLE_JEU +" ("
             +COLONNE_ID+" integer primary key autoincrement,"
             + COLONNE_NOM +" text not null," +
-            COLONNE_IMG+ "text)";
+            COLONNE_IMG+ " text)";
 
     public JeuxSQLiteOpenHelper(Context context) {
         super(context, "ratiog4.db", null, 1);
