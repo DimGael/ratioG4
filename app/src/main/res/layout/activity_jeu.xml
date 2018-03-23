@@ -7,11 +7,8 @@
 
     <TextView
         android:id="@+id/nomJeu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="TextView" />
+        android:text="Titre du jeu"
+        style="@style/titreJeu" />
 
     <Button
         android:id="@+id/bouton_creer_ratio"

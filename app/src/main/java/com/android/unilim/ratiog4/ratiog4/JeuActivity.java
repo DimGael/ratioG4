@@ -46,6 +46,9 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.bouton_creer_ratio :
+                final Intent intent = new Intent(this, RatioActivity.class);
+                intent.putExtra(KEY_ID_JEU, this.jeu.getId());
+                startActivity(intent);
                 break;
 
             case R.id.bouton_stats :

@@ -53,6 +53,10 @@ public class RatioDataSource {
         return listeJeux;
     }
 
+    public void ajouterRatio(Ratio ratio){
+        this.ajouterRatio(ratio, ratio.getIdJeu());
+    }
+
     public void ajouterRatio(Ratio ratio, Jeu jeu){
         this.ajouterRatio(ratio, jeu.getId());
     }

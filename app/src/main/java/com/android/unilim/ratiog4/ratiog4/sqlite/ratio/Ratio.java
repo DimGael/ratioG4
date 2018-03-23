@@ -9,20 +9,20 @@ public class Ratio {
     private int nbDefaite;
     private long id;
     private Date date;
-    private int idJeu;
+    private long idJeu;
 
     public int getNbDefaite() {
         return nbDefaite;
     }
 
-    public Ratio(long id, int nbVictoire, int nbDefaite, Date date, int idJeu){
+    public Ratio(long id, int nbVictoire, int nbDefaite, Date date, long idJeu){
         this.nbVictoire=nbVictoire;
         this.nbDefaite=nbDefaite;
         this.date = date;
         this.idJeu = idJeu;
     }
 
-    public Ratio(long id, int nbVictoire, int nbDefaite, int idJeu){
+    public Ratio(long id, int nbVictoire, int nbDefaite, long idJeu){
         this(id, nbVictoire, nbDefaite, GregorianCalendar.getInstance().getTime(), idJeu);
     }
 
@@ -58,11 +58,29 @@ public class Ratio {
         return this.date;
     }
 
-    public int getIdJeu() {
+    public long getIdJeu() {
         return idJeu;
     }
 
     public void setIdJeu(int idJeu) {
         this.idJeu = idJeu;
+    }
+
+    public void ajouterWin(){
+        this.nbVictoire++;
+    }
+
+    public void ajouterLose(){
+        this.nbDefaite++;
+    }
+
+    public void enleverWin(){
+        if(nbDefaite > 0)
+            nbDefaite--;
+    }
+
+    public void enleverLose(){
+        if(nbVictoire > 0)
+            nbVictoire--;
     }
 }
