@@ -45,6 +45,18 @@ public class JeuDataSource {
         return listeJeux;
     }
 
+    public Jeu getJeu(long id){
+        Cursor cursor = this.database.query(JeuxSQLiteOpenHelper.TABLE_JEU, allColumns, JeuxSQLiteOpenHelper.COLONNE_ID +" = "+id, null, null, null, null);
+
+        Jeu jeu = null;
+        if(cursor.moveToFirst())
+            jeu = creerJeu(cursor);
+
+        cursor.close();
+
+        return jeu;
+    }
+
     public Jeu ajouterJeu(Jeu jeu){
         ContentValues values = new ContentValues();
         values.put(JeuxSQLiteOpenHelper.COLONNE_NOM, jeu.getNom());

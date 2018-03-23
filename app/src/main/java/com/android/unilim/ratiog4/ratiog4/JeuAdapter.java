@@ -3,6 +3,7 @@ package com.android.unilim.ratiog4.ratiog4;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,9 @@ public class JeuAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                final Intent intentJeu = new Intent(context, JeuActivity.class);
+                intentJeu.putExtra(JeuActivity.KEY_ID_JEU, jeu.getId());
+                context.startActivity(intentJeu);
             }
         });
 
