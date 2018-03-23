@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
+import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuxSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -89,6 +90,16 @@ public class RatioDataSource {
 
     public void supprimerAllRatio(){
         this.database.delete(RatioSQLiteOpenHelper.TABLE_NOM, null, null);
+    }
+
+    public long modifier(Ratio ratio){
+        ContentValues values = new ContentValues();
+
+        values.put(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES, ratio.getNbDefaite());
+        values.put(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
+        values.put(RatioSQLiteOpenHelper.COLONNE_DATE, ratio.getDate().toString());
+
+        return this.database.update(RatioSQLiteOpenHelper.TABLE_NOM, values, RatioSQLiteOpenHelper.COLONNE_ID+" = "+ratio.getId(), null);
     }
 
     //Retourne un Objet à partir du String date

@@ -1,6 +1,5 @@
 package com.android.unilim.ratiog4.ratiog4;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -96,5 +95,6 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         }
 
         afficherRatio(this.ratio);
+        this.ratioDataSource.modifier(ratio);
     }
 }
