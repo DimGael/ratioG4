@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,8 @@ public class JeuDataSource {
     public JeuDataSource(Context context) {
         this.allColumns = new String[]{
                 JeuxSQLiteOpenHelper.COLONNE_ID,
-                JeuxSQLiteOpenHelper.COLONNE_NOM
+                JeuxSQLiteOpenHelper.COLONNE_NOM,
+                JeuxSQLiteOpenHelper.COLONNE_IMG
         };
 
         helper = new JeuxSQLiteOpenHelper(context);
@@ -57,21 +59,12 @@ public class JeuDataSource {
         return jeu;
     }
 
-    public Jeu ajouterJeu(Jeu jeu){
+    public long ajouterJeu(Jeu jeu) {
         ContentValues values = new ContentValues();
         values.put(JeuxSQLiteOpenHelper.COLONNE_NOM, jeu.getNom());
+        values.put(JeuxSQLiteOpenHelper.COLONNE_IMG, jeu.getUri_image().toString());
 
-        long id = this.database.insert(JeuxSQLiteOpenHelper.TABLE_JEU, JeuxSQLiteOpenHelper.COLONNE_NOM, values);
-
-        Cursor cursor = this.database.query(JeuxSQLiteOpenHelper.TABLE_JEU, allColumns, JeuxSQLiteOpenHelper.COLONNE_ID +" = "+id, null, null, null, null);
-
-        Jeu jeuAjoute = new Jeu();
-
-        if(cursor.moveToFirst()){
-            jeuAjoute = creerJeu(cursor);
-        }
-
-        return jeuAjoute;
+        return this.database.insert(JeuxSQLiteOpenHelper.TABLE_JEU, JeuxSQLiteOpenHelper.COLONNE_NOM, values);
     }
 
     public void supprimerJeu(Jeu jeu){
@@ -84,10 +77,13 @@ public class JeuDataSource {
 
     private Jeu creerJeu(Cursor cursor) {
        return new Jeu(cursor.getInt(JeuxSQLiteOpenHelper.NUM_COLONNE_ID),
-                cursor.getString(JeuxSQLiteOpenHelper.NUM_COLONNE_NOM));
+                cursor.getString(JeuxSQLiteOpenHelper.NUM_COLONNE_NOM),
+               Uri.parse(cursor.getString(cursor.getColumnIndex(JeuxSQLiteOpenHelper.COLONNE_IMG)))
+       );
     }
 
     public void supprimerAllJeux(){
         this.database.delete(JeuxSQLiteOpenHelper.TABLE_JEU, null, null);
     }
+
 }

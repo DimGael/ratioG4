@@ -1,23 +1,27 @@
 package com.android.unilim.ratiog4.ratiog4.sqlite.jeu;
 
+import android.net.Uri;
+
 //Pour l'instant on ne gère pas l'image du jeu
 public class Jeu {
 
     private long id;
     private String nom;
-    //Image
+    private Uri uri_image;
 
 
-    public Jeu(long id, String nom) {
+    public Jeu(long id, String nom, Uri uri) {
         this.id = id;
         this.nom = nom;
+        this.uri_image = uri;
     }
 
-    public Jeu() {}
+    public Uri getUri_image() {
+        return uri_image;
+    }
 
-    public Jeu(String nom){
-        this.nom=nom;
-        this.id=-1;
+    public void setUri_image(Uri uri_image) {
+        this.uri_image = uri_image;
     }
 
     public long getId() {

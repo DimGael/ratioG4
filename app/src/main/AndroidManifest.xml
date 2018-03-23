@@ -26,6 +26,9 @@
         <activity android:name=".JeuActivity" android:label="Mes Ratios">
         </activity>
 
+        <activity android:name=".RatioActivity" android:label="Nouveau Ratio">
+        </activity>
+
 
 
     </application>
