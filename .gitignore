@@ -2,9 +2,8 @@
 .gradle
 /local.properties
 .idea/*
+./idea/*
 .DS_Store
 /build
 /captures
 .externalNativeBuild
-.idea/modules.xml
-.idea/workspace.xml___jb_tmp___
