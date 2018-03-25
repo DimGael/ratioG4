@@ -3,6 +3,7 @@ package com.android.unilim.ratiog4.ratiog4;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +36,19 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         ratioDataSource = new RatioDataSource(this);
         ratioDataSource.open();
 
-        tv_win = (TextView)findViewById(R.id.TextViewVictoires);
-        tv_lose = (TextView)findViewById(R.id.TextViewDefaites);
+
+        TextView textViewWin = (TextView)findViewById(R.id.nb_victoires);
+        tv_win = textViewWin;
+
+        TextView textViewLose = (TextView)findViewById(R.id.nb_defaites);
+        tv_lose = textViewLose;
+
+        tv_win.setOnClickListener(this);
+        tv_lose.setOnClickListener(this);
+        ((Button)findViewById(R.id.bouton_ajouterWin)).setOnClickListener(this);
+        ((Button)findViewById(R.id.bouton_ajouterLose)).setOnClickListener(this);
+        ((Button)findViewById(R.id.bouton_enleverLose)).setOnClickListener(this);
+        ((Button)findViewById(R.id.bouton_enleverWin)).setOnClickListener(this);
 
         this.jeu = jeuDataSource.getJeu(getIntent().getLongExtra(JeuActivity.KEY_ID_JEU, -1));
 
@@ -51,13 +63,13 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
 
         this.ratio = new Ratio(-1, 0, 0, jeu.getId());
         afficherRatio(ratio);
-        this.ratioDataSource.ajouterRatio(this.ratio);
+        this.ratio.setId(this.ratioDataSource.ajouterRatio(this.ratio));
 
     }
 
     private void afficherRatio(Ratio ratio) {
-        tv_win.setText(ratio.getNbVictoire());
-        tv_lose.setText(ratio.getNbDefaite());
+        tv_win.setText(ratio.getNbVictoire()+"");
+        tv_lose.setText(ratio.getNbDefaite()+"");
     }
 
     @Override
@@ -95,6 +107,6 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         }
 
         afficherRatio(this.ratio);
-        this.ratioDataSource.modifier(ratio);
+        //this.ratioDataSource.modifier(ratio);
     }
 }

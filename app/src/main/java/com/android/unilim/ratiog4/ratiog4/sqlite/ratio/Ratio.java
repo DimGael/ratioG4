@@ -75,12 +75,12 @@ public class Ratio {
     }
 
     public void enleverWin(){
-        if(nbDefaite > 0)
-            nbDefaite--;
+        if(nbVictoire > 0)
+            nbVictoire--;
     }
 
     public void enleverLose(){
-        if(nbVictoire > 0)
-            nbVictoire--;
+        if(nbDefaite > 0)
+            nbDefaite--;
     }
 }

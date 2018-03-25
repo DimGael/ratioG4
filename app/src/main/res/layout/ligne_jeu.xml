@@ -12,8 +12,6 @@
     <ImageView
         android:id="@+id/image_jeu"
         android:layout_width="wrap_content"
-        android:maxWidth="50dp"
-        android:maxHeight="20dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="7dp"
@@ -25,13 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Titre du jeu" />
 
     <Button
         android:id="@+id/button_supprimer"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:text="Supprimer" />
 

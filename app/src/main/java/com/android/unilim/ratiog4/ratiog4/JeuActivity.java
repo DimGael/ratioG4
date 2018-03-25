@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,10 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
 
     private JeuDataSource jeuDataSource;
     public static final String KEY_ID_JEU = "idjeu";
+
+    /**
+     * Jeu séléctionné précédement dans Main Activity
+     */
     private Jeu jeu;
 
     @Override
@@ -40,6 +45,10 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
             final TextView tv_titreJeu = (TextView)findViewById(R.id.nomJeu);
             tv_titreJeu.setText(jeu.getNom());
         }
+
+        ((Button)findViewById(R.id.bouton_creer_ratio)).setOnClickListener(this);
+
+        ((Button)findViewById(R.id.bouton_stats)).setOnClickListener(this);
     }
 
     @Override

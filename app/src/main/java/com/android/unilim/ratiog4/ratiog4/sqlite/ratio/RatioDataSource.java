@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
-import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuxSQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,31 +45,29 @@ public class RatioDataSource {
     public List<Ratio> getAllRatio(){
         Cursor cursor = this.database.query(RatioSQLiteOpenHelper.TABLE_NOM, allColumns, null, null, null, null, null);
 
-        List<Ratio> listeJeux = new ArrayList<Ratio>();
+        List<Ratio> listeRatio = new ArrayList<Ratio>();
         while (cursor.moveToNext()) {
-            listeJeux.add(creerRatio(cursor));
+            listeRatio.add(creerRatio(cursor));
         }
         cursor.close();
 
-        return listeJeux;
+        return listeRatio;
     }
 
-    public void ajouterRatio(Ratio ratio){
-        this.ajouterRatio(ratio, ratio.getIdJeu());
+    public long ajouterRatio(Ratio ratio){
+        return this.ajouterRatio(ratio, ratio.getIdJeu());
     }
 
-    public void ajouterRatio(Ratio ratio, Jeu jeu){
-        this.ajouterRatio(ratio, jeu.getId());
-    }
-
-    public void ajouterRatio(Ratio ratio, long idJeu){
+    public long ajouterRatio(Ratio ratio, long idJeu){
         ContentValues values = new ContentValues();
+
         values.put(RatioSQLiteOpenHelper.COLONNE_DATE, ratio.getDate().toString());
         values.put(RatioSQLiteOpenHelper.COLONNE_ID_JEU, idJeu);
         values.put(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
         values.put(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES, ratio.getNbDefaite());
 
-        long id = this.database.insert(RatioSQLiteOpenHelper.TABLE_NOM, null, values);}
+        return this.database.insert(RatioSQLiteOpenHelper.TABLE_NOM, null, values);
+    }
 
     public void supprimerJeu(Ratio ratio){
         this.supprimerJeu(ratio.getId());
@@ -80,11 +78,11 @@ public class RatioDataSource {
     }
 
     private Ratio creerRatio(Cursor cursor) {
-       return new Ratio(cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_ID),
-                cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_NB_VICTOIRES),
-                cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_NB_DEFAITES),
+       return new Ratio(cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_ID)),
+                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES)),
+                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES)),
                 recupDate(cursor.getString(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_DATE))),
-                cursor.getInt(RatioSQLiteOpenHelper.NUM_COLONNE_ID_JEU)
+                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_ID_JEU))
        );
     }
 
@@ -111,7 +109,7 @@ public class RatioDataSource {
         final String[] hms = str.split(" ")[3].split(":");
 
         final String[] months = new String[] {
-                "Jan", "Feb","Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         };
 
         final String month = str.split(" ")[1];

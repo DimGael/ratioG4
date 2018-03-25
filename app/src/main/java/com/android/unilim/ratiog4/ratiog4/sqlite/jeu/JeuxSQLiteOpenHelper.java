@@ -23,7 +23,7 @@ public class JeuxSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_CREATE = "create table "+ TABLE_JEU +" ("
             +COLONNE_ID+" integer primary key autoincrement,"
             + COLONNE_NOM +" text not null," +
-            COLONNE_IMG+ " text)";
+            COLONNE_IMG+ " text);";
 
     public JeuxSQLiteOpenHelper(Context context) {
         super(context, "ratiog4.db", null, 1);
