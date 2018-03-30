@@ -63,7 +63,7 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
 
         this.ratio = new Ratio(-1, 0, 0, jeu.getId());
         afficherRatio(ratio);
-        //this.ratio.setId(this.ratioDataSource.ajouterRatio(this.ratio));
+        this.ratio.setId(this.ratioDataSource.ajouterRatio(this.ratio));
 
     }
 
