@@ -41,7 +41,7 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         tv_win = textViewWin;
 
         TextView textViewLose = (TextView)findViewById(R.id.nb_defaites);
-        tv_lose = textViewLose;
+        tv_lose = textViewLose; 
 
         tv_win.setOnClickListener(this);
         tv_lose.setOnClickListener(this);
