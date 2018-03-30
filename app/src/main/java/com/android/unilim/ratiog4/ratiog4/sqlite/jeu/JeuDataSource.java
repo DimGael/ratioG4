@@ -7,24 +7,36 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.android.unilim.ratiog4.ratiog4.sqlite.DatabaseOpenHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class JeuDataSource {
 
-    private JeuxSQLiteOpenHelper helper;
+    public static final String TABLE_JEU = "jeux";
+    public static final String COLONNE_ID = "_idJeu";
+    public static final String COLONNE_NOM = "nomJeu";
+    public static final String COLONNE_IMG = "uri";
+
+    public static final String TABLE_CREATE = "create table "+ TABLE_JEU +" ("
+            + COLONNE_ID +" integer primary key autoincrement,"
+            + COLONNE_NOM +" text not null," +
+            COLONNE_IMG + " text);";
+
+    private DatabaseOpenHelper helper;
     private SQLiteDatabase database;
     private final String[] allColumns;
 
 
     public JeuDataSource(Context context) {
         this.allColumns = new String[]{
-                JeuxSQLiteOpenHelper.COLONNE_ID,
-                JeuxSQLiteOpenHelper.COLONNE_NOM,
-                JeuxSQLiteOpenHelper.COLONNE_IMG
+                COLONNE_ID,
+                COLONNE_NOM,
+                COLONNE_IMG
         };
 
-        helper = new JeuxSQLiteOpenHelper(context);
+        helper = new DatabaseOpenHelper(context);
     }
 
     public void open() throws SQLException{
@@ -36,7 +48,7 @@ public class JeuDataSource {
     }
 
     public List<Jeu> getAllJeux(){
-        Cursor cursor = this.database.query(JeuxSQLiteOpenHelper.TABLE_JEU, allColumns, null, null, null, null, null);
+        Cursor cursor = this.database.query(TABLE_JEU, allColumns, null, null, null, null, null);
 
         List<Jeu> listeJeux = new ArrayList<Jeu>();
         while (cursor.moveToNext()) {
@@ -48,7 +60,7 @@ public class JeuDataSource {
     }
 
     public Jeu getJeu(long id){
-        Cursor cursor = this.database.query(JeuxSQLiteOpenHelper.TABLE_JEU, allColumns, JeuxSQLiteOpenHelper.COLONNE_ID +" = "+id, null, null, null, null);
+        Cursor cursor = this.database.query(TABLE_JEU, allColumns, COLONNE_ID +" = "+id, null, null, null, null);
 
         Jeu jeu = null;
         if(cursor.moveToFirst())
@@ -61,10 +73,10 @@ public class JeuDataSource {
 
     public long ajouterJeu(Jeu jeu) {
         ContentValues values = new ContentValues();
-        values.put(JeuxSQLiteOpenHelper.COLONNE_NOM, jeu.getNom());
-        values.put(JeuxSQLiteOpenHelper.COLONNE_IMG, jeu.getUri_image().toString());
+        values.put(COLONNE_NOM, jeu.getNom());
+        values.put(COLONNE_IMG, jeu.getUri_image().toString());
 
-        return this.database.insert(JeuxSQLiteOpenHelper.TABLE_JEU, JeuxSQLiteOpenHelper.COLONNE_NOM, values);
+        return this.database.insert(TABLE_JEU, COLONNE_NOM, values);
     }
 
     public void supprimerJeu(Jeu jeu){
@@ -72,18 +84,18 @@ public class JeuDataSource {
     }
 
     public void supprimerJeu(long id) {
-        this.database.delete(JeuxSQLiteOpenHelper.TABLE_JEU, JeuxSQLiteOpenHelper.COLONNE_ID +" = "+id, null);
+        this.database.delete(TABLE_JEU, COLONNE_ID +" = "+id, null);
     }
 
     private Jeu creerJeu(Cursor cursor) {
-       return new Jeu(cursor.getInt(JeuxSQLiteOpenHelper.NUM_COLONNE_ID),
-                cursor.getString(JeuxSQLiteOpenHelper.NUM_COLONNE_NOM),
-               Uri.parse(cursor.getString(cursor.getColumnIndex(JeuxSQLiteOpenHelper.COLONNE_IMG)))
+       return new Jeu(cursor.getInt(cursor.getColumnIndex(COLONNE_ID)),
+                cursor.getString(cursor.getColumnIndex(COLONNE_NOM)),
+               Uri.parse(cursor.getString(cursor.getColumnIndex(COLONNE_IMG)))
        );
     }
 
     public void supprimerAllJeux(){
-        this.database.delete(JeuxSQLiteOpenHelper.TABLE_JEU, null, null);
+        this.database.delete(TABLE_JEU, null, null);
     }
 
 }

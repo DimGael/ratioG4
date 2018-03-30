@@ -41,7 +41,7 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         tv_win = textViewWin;
 
         TextView textViewLose = (TextView)findViewById(R.id.nb_defaites);
-        tv_lose = textViewLose; 
+        tv_lose = textViewLose;
 
         tv_win.setOnClickListener(this);
         tv_lose.setOnClickListener(this);
@@ -63,7 +63,7 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
 
         this.ratio = new Ratio(-1, 0, 0, jeu.getId());
         afficherRatio(ratio);
-        this.ratio.setId(this.ratioDataSource.ajouterRatio(this.ratio));
+        //this.ratio.setId(this.ratioDataSource.ajouterRatio(this.ratio));
 
     }
 

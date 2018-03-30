@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
+import com.android.unilim.ratiog4.ratiog4.sqlite.DatabaseOpenHelper;
+import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,21 +17,38 @@ import java.util.List;
 
 public class RatioDataSource {
 
-    private RatioSQLiteOpenHelper helper;
+    public static final String TABLE_NOM = "table_ratio";
+    public static final String COLONNE_ID = "_idRatio";
+    public static final String COLONNE_ID_JEU = JeuDataSource.COLONNE_ID;
+    //public static final String COLONNE_ID_COMMENTAIRE = "a rajouter";
+    public static final String COLONNE_DATE = "date";
+    public static final String COLONNE_NB_VICTOIRES = "nbVictoires";
+    public static final String COLONNE_NB_DEFAITES = "nbDefaites";
+
+    public static final String TABLE_CREATE = "create table "+ TABLE_NOM +" ("
+            +COLONNE_ID+" integer primary key autoincrement,"
+            +COLONNE_DATE+" text not null,"
+            +COLONNE_NB_VICTOIRES+" integer,"
+            +COLONNE_NB_DEFAITES+"integer,"
+            +COLONNE_ID_JEU + " integer"
+            +",FOREIGN KEY ("+COLONNE_ID_JEU+") references "+JeuDataSource.TABLE_JEU+"("+JeuDataSource.COLONNE_ID+")"
+            +"); ";
+
+    private DatabaseOpenHelper helper;
     private SQLiteDatabase database;
     private final String[] allColumns;
 
 
     public RatioDataSource(Context context) {
         this.allColumns = new String[]{
-                RatioSQLiteOpenHelper.COLONNE_ID,
-                RatioSQLiteOpenHelper.COLONNE_ID_JEU,
-                RatioSQLiteOpenHelper.COLONNE_DATE,
-                RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES,
-                RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES
+                COLONNE_ID,
+                COLONNE_ID_JEU,
+                COLONNE_DATE,
+                COLONNE_NB_VICTOIRES,
+                COLONNE_NB_DEFAITES
         };
 
-        helper = new RatioSQLiteOpenHelper(context);
+        helper = new DatabaseOpenHelper(context);
     }
 
     public void open() throws SQLException{
@@ -43,7 +60,7 @@ public class RatioDataSource {
     }
 
     public List<Ratio> getAllRatio(){
-        Cursor cursor = this.database.query(RatioSQLiteOpenHelper.TABLE_NOM, allColumns, null, null, null, null, null);
+        Cursor cursor = this.database.query(TABLE_NOM, allColumns, null, null, null, null, null);
 
         List<Ratio> listeRatio = new ArrayList<Ratio>();
         while (cursor.moveToNext()) {
@@ -61,12 +78,12 @@ public class RatioDataSource {
     public long ajouterRatio(Ratio ratio, long idJeu){
         ContentValues values = new ContentValues();
 
-        values.put(RatioSQLiteOpenHelper.COLONNE_DATE, ratio.getDate().toString());
-        values.put(RatioSQLiteOpenHelper.COLONNE_ID_JEU, idJeu);
-        values.put(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
-        values.put(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES, ratio.getNbDefaite());
+        values.put(COLONNE_DATE, ratio.getDate().toString());
+        values.put(COLONNE_ID_JEU, idJeu);
+        values.put(COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
+        values.put(COLONNE_NB_DEFAITES, ratio.getNbDefaite());
 
-        return this.database.insert(RatioSQLiteOpenHelper.TABLE_NOM, null, values);
+        return this.database.insert(TABLE_NOM, null, values);
     }
 
     public void supprimerJeu(Ratio ratio){
@@ -74,30 +91,30 @@ public class RatioDataSource {
     }
 
     public void supprimerJeu(long id) {
-        this.database.delete(RatioSQLiteOpenHelper.TABLE_NOM, RatioSQLiteOpenHelper.COLONNE_ID +" = "+id, null);
+        this.database.delete(TABLE_NOM, COLONNE_ID +" = "+id, null);
     }
 
     private Ratio creerRatio(Cursor cursor) {
-       return new Ratio(cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_ID)),
-                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES)),
-                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES)),
-                recupDate(cursor.getString(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_DATE))),
-                cursor.getInt(cursor.getColumnIndex(RatioSQLiteOpenHelper.COLONNE_ID_JEU))
+       return new Ratio(cursor.getInt(cursor.getColumnIndex(COLONNE_ID)),
+                cursor.getInt(cursor.getColumnIndex(COLONNE_NB_VICTOIRES)),
+                cursor.getInt(cursor.getColumnIndex(COLONNE_NB_DEFAITES)),
+                recupDate(cursor.getString(cursor.getColumnIndex(COLONNE_DATE))),
+                cursor.getInt(cursor.getColumnIndex(COLONNE_ID_JEU))
        );
     }
 
     public void supprimerAllRatio(){
-        this.database.delete(RatioSQLiteOpenHelper.TABLE_NOM, null, null);
+        this.database.delete(TABLE_NOM, null, null);
     }
 
     public long modifier(Ratio ratio){
         ContentValues values = new ContentValues();
 
-        values.put(RatioSQLiteOpenHelper.COLONNE_NB_DEFAITES, ratio.getNbDefaite());
-        values.put(RatioSQLiteOpenHelper.COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
-        values.put(RatioSQLiteOpenHelper.COLONNE_DATE, ratio.getDate().toString());
+        values.put(COLONNE_NB_DEFAITES, ratio.getNbDefaite());
+        values.put(COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
+        values.put(COLONNE_DATE, ratio.getDate().toString());
 
-        return this.database.update(RatioSQLiteOpenHelper.TABLE_NOM, values, RatioSQLiteOpenHelper.COLONNE_ID+" = "+ratio.getId(), null);
+        return this.database.update(TABLE_NOM, values, COLONNE_ID+" = "+ratio.getId(), null);
     }
 
     //Retourne un Objet à partir du String date
