@@ -21,8 +21,8 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
     private JeuDataSource jeuDataSource;
     private RatioDataSource ratioDataSource;
     private Jeu jeu;
-    private TextView tv_win;
-    private TextView tv_lose;
+    private Button tv_win;
+    private Button tv_lose;
     private Ratio ratio;
 
     @Override
@@ -37,16 +37,14 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
         ratioDataSource.open();
 
 
-        TextView textViewWin = (TextView)findViewById(R.id.nb_victoires);
+        Button textViewWin = (Button)findViewById(R.id.nb_victoires);
         tv_win = textViewWin;
 
-        TextView textViewLose = (TextView)findViewById(R.id.nb_defaites);
+        Button textViewLose = (Button)findViewById(R.id.nb_defaites);
         tv_lose = textViewLose;
 
         tv_win.setOnClickListener(this);
         tv_lose.setOnClickListener(this);
-        ((Button)findViewById(R.id.bouton_ajouterWin)).setOnClickListener(this);
-        ((Button)findViewById(R.id.bouton_ajouterLose)).setOnClickListener(this);
         ((Button)findViewById(R.id.bouton_enleverLose)).setOnClickListener(this);
         ((Button)findViewById(R.id.bouton_enleverWin)).setOnClickListener(this);
 
@@ -89,20 +87,21 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.bouton_ajouterLose :
-                this.ratio.ajouterLose();
-                break;
 
             case R.id.bouton_enleverLose :
                 this.ratio.enleverLose();
                 break;
 
-            case R.id.bouton_ajouterWin :
+            case R.id.bouton_enleverWin :
+                this.ratio.enleverWin();
+                break;
+
+            case R.id.nb_victoires:
                 this.ratio.ajouterWin();
                 break;
 
-            case R.id.bouton_enleverWin :
-                this.ratio.enleverWin();
+            case R.id.nb_defaites:
+                this.ratio.ajouterLose();
                 break;
         }
 

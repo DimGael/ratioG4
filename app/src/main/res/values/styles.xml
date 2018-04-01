@@ -9,8 +9,10 @@
     </style>
 
     <style name="gridElements">
-        <item name="android:width">100dp</item>
-        <item name="android:textSize">50sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">50dp</item>
     </style>
 
     <style name="nbWinLose">
@@ -26,6 +28,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="boutonsRatios">
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">20dp</item>
     </style>
 
 

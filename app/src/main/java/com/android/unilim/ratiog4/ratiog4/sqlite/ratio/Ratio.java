@@ -10,6 +10,10 @@ public class Ratio {
     private long id;
     private Date date;
     private long idJeu;
+    /**
+     * Si enCours = vrai : l'utilisateur n'a pas encore enregistrer son ratio
+     */
+    private boolean enCours;
 
     public int getNbDefaite() {
         return nbDefaite;
@@ -32,14 +36,6 @@ public class Ratio {
 
     public int getNbVictoire() {
         return nbVictoire;
-    }
-
-    public void setNbVictoire(int nbVictoire) {
-        this.nbVictoire = nbVictoire;
-    }
-
-    public void setNbDefaite(int nbDefaite) {
-        this.nbDefaite = nbDefaite;
     }
 
     public long getId() {
@@ -82,5 +78,9 @@ public class Ratio {
     public void enleverLose(){
         if(nbDefaite > 0)
             nbDefaite--;
+    }
+
+    public void actualiserDate(){
+        this.date = new Date();
     }
 }
