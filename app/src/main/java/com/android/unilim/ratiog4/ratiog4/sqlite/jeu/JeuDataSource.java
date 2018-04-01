@@ -79,6 +79,10 @@ public class JeuDataSource {
         return this.database.insert(TABLE_JEU, COLONNE_NOM, values);
     }
 
+    /**
+     * Supprime le jeu en paramètre, penser à supprimer les ratios associés avant
+     * @param jeu
+     */
     public void supprimerJeu(Jeu jeu){
         this.supprimerJeu(jeu.getId());
     }

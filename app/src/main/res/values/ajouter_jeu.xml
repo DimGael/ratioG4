@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="legendeAjouterJeu">Afin d\'ajouter un jeu, il suffit de saisir le nom de ce jeu ainsi que d\'insérer l\'image qui lui est associé.</string>
+    <string name="hint_edittext_insertion_jeu">Rentrez ici le nom du jeu</string>
+    <string name="titre_insertion_titre_jeu">Insertion du nom jeu :</string>
+    <string name="titre_insertion_image_jeu">Insertion de l\'image liée au jeu :</string>
+    <string name="bouton_insertion_jeu">Ajouter un jeu</string>
+    <string name="bouton_ajouter_image">Logo</string>
+    <string name="description_insertion_image_jeu">Le logo du jeu</string>
+</resources>

@@ -3,4 +3,6 @@
     <color name="colorPrimary">#505050</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ff0011</color>
+
+    <color name="colorBoutonJeuActivity">#c9c9c9</color>
 </resources>

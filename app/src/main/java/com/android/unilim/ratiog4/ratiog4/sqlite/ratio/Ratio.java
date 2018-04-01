@@ -5,13 +5,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Ratio {
+    private long id;
+    private final long idJeu;
+    private String commentaire;
+
+    private Date date;
     private int nbVictoire;
     private int nbDefaite;
-    private long id;
-    private Date date;
-    private long idJeu;
+
     /**
      * Si enCours = vrai : l'utilisateur n'a pas encore enregistrer son ratio
+     * Initialisé à true
      */
     private boolean enCours;
 
@@ -19,19 +23,45 @@ public class Ratio {
         return nbDefaite;
     }
 
-    public Ratio(long id, int nbVictoire, int nbDefaite, Date date, long idJeu){
-        this.nbVictoire=nbVictoire;
-        this.nbDefaite=nbDefaite;
-        this.date = date;
-        this.idJeu = idJeu;
-    }
 
     public Ratio(long id, int nbVictoire, int nbDefaite, long idJeu){
         this(id, nbVictoire, nbDefaite, GregorianCalendar.getInstance().getTime(), idJeu);
     }
 
+    public Ratio(long id, int nbVictoire, int nbDefaite, Date date, long idJeu){
+        this.id = id;
+        this.nbVictoire=nbVictoire;
+        this.nbDefaite=nbDefaite;
+        this.date = date;
+        this.enCours = true;
+
+        this.idJeu = idJeu;
+
+        this.commentaire = "";
+    }
+
+    public boolean isEnCours() {
+        return enCours;
+    }
+
+    public void finirEnregistrement(){
+        this.enCours = false;
+    }
+
     public double getRatio(){
         return (double)(100 *this.nbVictoire / (this.nbDefaite+this.nbVictoire));
+    }
+
+    public boolean aUnCommentaire(){
+        return !this.commentaire.equals("");
+    }
+
+    public void setCommentaire(String commentaire){
+        this.commentaire = commentaire;
+    }
+
+    public String getCommentaire() {
+        return this.commentaire;
     }
 
     public int getNbVictoire() {
@@ -58,10 +88,6 @@ public class Ratio {
         return idJeu;
     }
 
-    public void setIdJeu(int idJeu) {
-        this.idJeu = idJeu;
-    }
-
     public void ajouterWin(){
         this.nbVictoire++;
     }
@@ -82,5 +108,9 @@ public class Ratio {
 
     public void actualiserDate(){
         this.date = new Date();
+    }
+
+    public int getNbParties(){
+        return this.nbDefaite + this.nbVictoire;
     }
 }

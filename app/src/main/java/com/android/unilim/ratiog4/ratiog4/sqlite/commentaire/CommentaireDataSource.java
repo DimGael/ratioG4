@@ -13,12 +13,12 @@ import com.android.unilim.ratiog4.ratiog4.sqlite.DatabaseOpenHelper;
 
 public class CommentaireDataSource {
 
-    public static final String TABLE_NOM = "commentaires";
+    public static final String TABLE_COMMENTAIRES = "commentaires";
 
     public static final String COLONNE_ID = "_idCommentaire";
     public static final String COLONNE_TEXTE = "text";
 
-    public static final String TABLE_CREATE = "create table "+ TABLE_NOM +" ("
+    public static final String TABLE_CREATE = "create table "+ TABLE_COMMENTAIRES +" ("
             + COLONNE_ID +" integer primary key autoincrement,"
             + COLONNE_TEXTE + " text);";
 
@@ -44,7 +44,7 @@ public class CommentaireDataSource {
     }
 
     public Commentaire getCommentaire(long id) {
-        Cursor cursor = database.query(TABLE_NOM, allColumns, COLONNE_ID +" = "+id, null, null, null, null);
+        Cursor cursor = database.query(TABLE_COMMENTAIRES, allColumns, COLONNE_ID +" = "+id, null, null, null, null);
 
         cursor.moveToFirst();
         Commentaire commentaire = creerCommentaire(cursor);
@@ -58,7 +58,7 @@ public class CommentaireDataSource {
     }
 
     public int supprimerCommentaire(long id) {
-        return database.delete(TABLE_NOM, COLONNE_ID+ " = "+id, null);
+        return database.delete(TABLE_COMMENTAIRES, COLONNE_ID+ " = "+id, null);
     }
 
     private Commentaire creerCommentaire(Cursor cursor) {

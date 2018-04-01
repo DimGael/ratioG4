@@ -32,8 +32,14 @@
 
     <style name="boutonsRatios">
         <item name="android:layout_margin">20dp</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="bouton_jeu_activity">
+        <item name="android:layout_height">100dp</item>
+        <item name="android:background">@color/colorBoutonJeuActivity</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
 

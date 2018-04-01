@@ -9,4 +9,7 @@
     <string name="TextBoutonMoins">-</string>
     <string name="bouton_creer_ratio">NOUVEAU RATIO</string>
     <string name="bouton_stats">STATISTIQUES</string>
+    <string name="boutonQuitter">Annuler</string>
+    <string name="boutonValider">Enregistrer</string>
+    <string name="hint_commentaire">Votre commentaire : </string>
 </resources>

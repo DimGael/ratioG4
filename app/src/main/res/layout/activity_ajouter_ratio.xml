@@ -92,12 +92,15 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <android.support.design.widget.TextInputEditText
+            android:paddingHorizontal="10dp"
+            android:id="@+id/edit_text_commentaire"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Un commentaire ?" />
+            android:layout_height="80dp"
+            android:hint="@string/hint_commentaire" />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
@@ -116,24 +119,25 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btn_valider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Valider"
+            android:text="@string/boutonValider"
             android:background="#09c20c"
             android:textColor="#ffffff"
             style="@style/boutonsRatios" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_quitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="@style/boutonsRatios"
             android:background="#690606"
             android:textColor="#ffffff"
-            android:text="Quitter" />
+            android:text="@string/boutonQuitter"
+            />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

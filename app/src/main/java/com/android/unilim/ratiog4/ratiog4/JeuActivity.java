@@ -1,6 +1,7 @@
 package com.android.unilim.ratiog4.ratiog4;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
+import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.RatioDataSource;
 
 /**
  * Created by Gael on 22/03/2018.
@@ -17,8 +19,13 @@ import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 
 public class JeuActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private JeuDataSource jeuDataSource;
+
     public static final String KEY_ID_JEU = "idjeu";
+
+    private JeuDataSource jeuDataSource;
+    private RatioDataSource ratioDataSource;
+
+    private Button boutonRatio;
 
     /**
      * Jeu séléctionné précédement dans Main Activity
@@ -31,6 +38,8 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
         this.setContentView(R.layout.activity_jeu);
 
         jeuDataSource = new JeuDataSource(this);
+        ratioDataSource = new RatioDataSource(this);
+        ratioDataSource.open();
         jeuDataSource.open();
 
         final Intent intent = getIntent();
@@ -46,8 +55,27 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
             tv_titreJeu.setText(jeu.getNom());
         }
 
-        ((Button)findViewById(R.id.bouton_creer_ratio)).setOnClickListener(this);
+        this.boutonRatio = (Button)findViewById(R.id.bouton_creer_ratio);
+        checkRatioEnCours();
 
+        setListener();
+    }
+
+    private void checkRatioEnCours() {
+        if(this.ratioDataSource.aUnRatioEnCoursJeu(this.jeu.getId())) {
+            this.boutonRatio.setText("RATIO EN COURS");
+            this.boutonRatio.setTextColor(Color.GREEN);
+            this.boutonRatio.setBackgroundColor(Color.BLACK);
+        }
+        else {
+            this.boutonRatio.setText("NOUVEAU RATIO");
+            this.boutonRatio.setTextColor(Color.BLACK);
+            this.boutonRatio.setBackgroundColor(getResources().getColor(R.color.colorBoutonJeuActivity));
+        }
+    }
+
+    private void setListener() {
+        this.boutonRatio.setOnClickListener(this);
         ((Button)findViewById(R.id.bouton_stats)).setOnClickListener(this);
     }
 
@@ -69,11 +97,14 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
     public void onPause(){
         super.onPause();
         this.jeuDataSource.close();
+        this.ratioDataSource.close();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         this.jeuDataSource.open();
+        this.ratioDataSource.open();
+        checkRatioEnCours();
     }
 }

@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Afin d'ajouter un jeu, il suffit de saisir le nom de ce jeu ainsi que d'insérer l'image qui lui est associé."
+        android:text="@string/legendeAjouterJeu"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -29,7 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Rentrez ici le nom du jeu"
+        android:hint="@string/hint_edittext_insertion_jeu"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="52dp"
-        android:text="Insertion du nom jeu :"
+        android:text="@string/titre_insertion_titre_jeu"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.158"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:text="Insertion de l'image liée au jeu :"
+        android:text="@string/titre_insertion_image_jeu"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.222"
@@ -74,13 +74,14 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Image"
+        android:text="@string/bouton_ajouter_image"
         app:layout_constraintBottom_toTopOf="@+id/insertion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.168"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="24dp" />
 
     <Button
         android:id="@+id/insertion"
@@ -90,11 +91,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Ajouter un jeu"
+        android:text="@string/bouton_insertion_jeu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -110,6 +110,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.061"
-        app:srcCompat="@android:drawable/alert_dark_frame" />
+        app:srcCompat="@android:drawable/alert_dark_frame"
+        android:contentDescription="@string/description_insertion_image_jeu" />
 
 </android.support.constraint.ConstraintLayout>

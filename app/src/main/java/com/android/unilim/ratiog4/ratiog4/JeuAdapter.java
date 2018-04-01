@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
+import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.RatioDataSource;
 
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class JeuAdapter extends BaseAdapter {
         titre_jeu.setText(jeu.getNom());
 
         ImageView imageView=(ImageView)convertView.findViewById(R.id.image_jeu);
+        imageView.getLayoutParams().height=150;
         imageView.getLayoutParams().width=150;
-        imageView.getLayoutParams().height=75;
 
         imageView.setImageURI(jeu.getUri_image());
 
@@ -91,19 +92,31 @@ public class JeuAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 Toast.makeText(context, jeu.getNom()+" supprimé", Toast.LENGTH_SHORT).show();
-                                final JeuDataSource jeuDataSource = new JeuDataSource(context);
-                                jeuDataSource.open();
-                                jeuDataSource.supprimerJeu(jeu);
+
+                                supprimerJeuBdd(jeu);
+
                                 jeux.remove(position);
 
                                 listView.setAdapter(JeuAdapter.this);
 
-                                jeuDataSource.close();
+
                             }
                         }).create().show();
             }
         });
 
         return convertView;
+    }
+
+    private void supprimerJeuBdd(Jeu jeu){
+        final JeuDataSource jeuDataSource = new JeuDataSource(context);
+        final RatioDataSource ratioDataSource = new RatioDataSource(context);
+        ratioDataSource.open();
+        jeuDataSource.open();
+        ratioDataSource.supprimerJeu(jeu);
+        jeuDataSource.supprimerJeu(jeu);
+
+        jeuDataSource.close();
+        ratioDataSource.close();
     }
 }
