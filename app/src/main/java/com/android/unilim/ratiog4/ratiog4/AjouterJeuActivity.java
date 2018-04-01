@@ -74,8 +74,7 @@ public class AjouterJeuActivity extends AppCompatActivity implements View.OnClic
             break;
 
             case R.id.image :
-                Toast.makeText(this, "coucou", Toast.LENGTH_SHORT).show();
-                Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 gallery.setType("image/*");
                 startActivityForResult(gallery, RESULT_LOAD_IMAGE);
 
