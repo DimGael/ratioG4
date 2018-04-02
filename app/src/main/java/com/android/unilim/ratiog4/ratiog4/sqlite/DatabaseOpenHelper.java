@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.android.unilim.ratiog4.ratiog4.sqlite.commentaire.CommentaireDataSource;
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.JeuDataSource;
 import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.RatioDataSource;
 

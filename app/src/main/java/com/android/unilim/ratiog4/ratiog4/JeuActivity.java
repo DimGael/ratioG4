@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,7 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
         jeuDataSource.open();
 
         final Intent intent = getIntent();
-
         this.jeu = jeuDataSource.getJeu(intent.getLongExtra(KEY_ID_JEU, -1));
-
         if(jeu == null) {
             Toast.makeText(this, "Jeu inexistant", Toast.LENGTH_SHORT).show();
             finish();
@@ -56,6 +55,9 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
         }
 
         this.boutonRatio = (Button)findViewById(R.id.bouton_creer_ratio);
+        final ImageView logoJeu = (ImageView)findViewById(R.id.logo_jeu);
+        logoJeu.setImageURI(jeu.getUri_image());
+
         checkRatioEnCours();
 
         setListener();

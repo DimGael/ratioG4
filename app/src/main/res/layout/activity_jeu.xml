@@ -2,24 +2,48 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/nomJeu"
+        style="@style/titreJeu"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Titre du jeu"
-        style="@style/titreJeu" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/logo_jeu"
+        android:layout_width="226dp"
+        android:layout_height="182dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Logo du jeu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomJeu" />
 
     <Button
         android:id="@+id/bouton_creer_ratio"
         style="@style/bouton_jeu_activity"
         android:layout_width="match_parent"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="8dp"
         android:text="@string/bouton_creer_ratio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomJeu" />
+        app:layout_constraintTop_toBottomOf="@+id/logo_jeu" />
 
     <Button
         android:id="@+id/bouton_stats"
@@ -29,6 +53,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bouton_creer_ratio"
-        app:layout_constraintVertical_bias="0.589" />
+        app:layout_constraintTop_toBottomOf="@+id/bouton_creer_ratio" />
 </android.support.constraint.ConstraintLayout>
