@@ -44,12 +44,16 @@ class ListRatioAnalyzer {
         String str = new Double(winrate).toString();
 
 
+        String[] tab = str.split(Pattern.quote("."));
         if(winrate%1 > 0) {
-            String[] tab = str.split(Pattern.quote("."));
 
             return tab[0] + ',' + tab[1].substring(0, 1)+"%";
         }
 
-        return str.substring(0,2)+"%";
+        return tab[0]+"%";
+    }
+
+    public boolean estPositif(){
+        return this.getNbWins() >= this.getNbLoses();
     }
 }

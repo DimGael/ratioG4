@@ -9,4 +9,7 @@
 
     <color name="colorWin">#13ae2f</color>
     <color name="colorLose">#a10309</color>
+
+    <color name="ratioSelected">#94c5d4</color>
+    <color name="ratioUnselected">#ffffff</color>
 </resources>

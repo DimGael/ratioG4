@@ -119,7 +119,7 @@ public class RatioDataSource {
     public long ajouterRatio(Ratio ratio, long idJeu){
         ContentValues values = new ContentValues();
 
-        values.put(COLONNE_DATE, ratio.getDate().toString());
+        values.put(COLONNE_DATE, ratio.getDate().getTime().toString());
         values.put(COLONNE_ID_JEU, idJeu);
         values.put(COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
         values.put(COLONNE_NB_DEFAITES, ratio.getNbDefaite());
@@ -168,7 +168,7 @@ public class RatioDataSource {
 
         values.put(COLONNE_NB_DEFAITES, ratio.getNbDefaite());
         values.put(COLONNE_NB_VICTOIRES, ratio.getNbVictoire());
-        values.put(COLONNE_DATE, ratio.getDate().toString());
+        values.put(COLONNE_DATE, ratio.getDate().getTime().toString());
         values.put(COLONNE_COMMENTAIRE, ratio.getCommentaire());
 
         return this.database.update(TABLE_NOM, values, COLONNE_ID+" = "+ratio.getId(), null);
@@ -187,7 +187,7 @@ public class RatioDataSource {
      * @param str Chaine à convertir => new Date().toString()
      * @return Objet Date
      */
-    private Date recupDate(String str){
+    private Calendar recupDate(String str){
         Calendar calendar = GregorianCalendar.getInstance();
         final int year = Integer.parseInt(str.split(" ")[5]);
         final int day = Integer.parseInt(str.split(" ")[2]);
@@ -208,6 +208,6 @@ public class RatioDataSource {
 
         calendar.set(year, monthNumber, day, Integer.parseInt(hms[0]), Integer.parseInt(hms[1]), Integer.parseInt(hms[2]));
 
-        return calendar.getTime();
+        return calendar;
     }
 }

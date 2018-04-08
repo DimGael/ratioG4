@@ -65,7 +65,10 @@ public class StatActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.stats_nb_lose)).setText("L  : "+ratioAnalyzer.getNbLoses());
 
         //Affichage du pourcentage de win
-        ((TextView)findViewById(R.id.stats_pourcentage)).setText(ratioAnalyzer.getWinRate());
+        TextView tv_winrate = (TextView)findViewById(R.id.stats_pourcentage);
+        tv_winrate.setText(ratioAnalyzer.getWinRate());
+        if(!ratioAnalyzer.estPositif())
+            tv_winrate.setTextColor(getResources().getColor(R.color.colorLose));
 
         final ListView listView = (ListView)findViewById(R.id.stats_ratios);
         listView.setAdapter(new RatioAdapter(this, this.ratiosJeu));

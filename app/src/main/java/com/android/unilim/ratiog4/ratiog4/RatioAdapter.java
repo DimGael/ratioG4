@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.Ratio;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
 import java.util.List;
 
 public class RatioAdapter extends BaseAdapter {
@@ -46,7 +49,7 @@ public class RatioAdapter extends BaseAdapter {
         view = layoutInflater.inflate(R.layout.ligne_ratio, null);
 
         final TextView tv_date = (TextView)view.findViewById(R.id.ligne_ratio_date);
-        tv_date.setText(ratio.getDate().toString());
+        tv_date.setText(afficherDate(ratio.getDate()));
 
         final TextView tv_ratio_win = (TextView)view.findViewById(R.id.ligne_ratio_win);
         tv_ratio_win.setText("W: "+ratio.getNbVictoire());
@@ -57,6 +60,57 @@ public class RatioAdapter extends BaseAdapter {
         final TextView tv_winrate = (TextView)view.findViewById(R.id.ligne_ratio_winrate);
         tv_winrate.setText(ratio.getPourcentage());
 
+        if(!ratio.estPositif()){
+            tv_winrate.setTextColor(context.getResources().getColor(R.color.colorLose));
+        }
+
+        view.setBackgroundColor(context.getResources().getColor(R.color.ratioUnselected));
+
+
+        final TextView tv_commentaire = (TextView) view.findViewById(R.id.ligne_ratio_commentaire);
+        tv_commentaire.setText("Commentaire : " + ratio.getCommentaire());
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if(tv_commentaire.getVisibility() == View.VISIBLE){
+                    tv_commentaire.setVisibility(View.GONE);
+                    view.setBackgroundColor(context.getResources().getColor(R.color.ratioUnselected));
+                }
+                else if(!ratio.getCommentaire().equals(""))
+                {
+                    tv_commentaire.setVisibility(View.VISIBLE);
+                    view.setBackgroundColor(context.getResources().getColor(R.color.ratioSelected));
+                }
+            }
+        });
+
+
+
         return view;
+    }
+
+    private String afficherDate(Calendar date) {
+        String jour;
+        if(date.get(Calendar.DAY_OF_MONTH) < 10)
+            jour = "0"+date.get(Calendar.DAY_OF_MONTH);
+        else
+            jour = date.get(Calendar.DAY_OF_MONTH)+"";
+
+        String mois;
+
+        if(date.get(Calendar.MONTH) < 10)
+            mois = "0"+date.get(Calendar.MONTH);
+        else
+            mois = date.get(Calendar.MONTH)+"";
+
+
+        String annee = new Integer(date.get(Calendar.YEAR)).toString().substring(2);
+
+
+        return jour+"/"+mois+"/"+annee;
     }
 }

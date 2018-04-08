@@ -1,6 +1,7 @@
 package com.android.unilim.ratiog4.ratiog4.sqlite.ratio;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
@@ -10,7 +11,7 @@ public class Ratio {
     private final long idJeu;
     private String commentaire;
 
-    private Date date;
+    private Calendar date;
     private int nbVictoire;
     private int nbDefaite;
 
@@ -26,10 +27,10 @@ public class Ratio {
 
 
     public Ratio(long id, int nbVictoire, int nbDefaite, long idJeu){
-        this(id, nbVictoire, nbDefaite, GregorianCalendar.getInstance().getTime(), idJeu);
+        this(id, nbVictoire, nbDefaite, GregorianCalendar.getInstance(), idJeu);
     }
 
-    public Ratio(long id, int nbVictoire, int nbDefaite, Date date, long idJeu){
+    public Ratio(long id, int nbVictoire, int nbDefaite, Calendar date, long idJeu){
         this.id = id;
         this.nbVictoire=nbVictoire;
         this.nbDefaite=nbDefaite;
@@ -77,11 +78,11 @@ public class Ratio {
         this.id = id;
     }
 
-    public void setDate(Date date){
+    public void setDate(Calendar date){
         this.date = date;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return this.date;
     }
 
@@ -108,7 +109,7 @@ public class Ratio {
     }
 
     public void actualiserDate(){
-        this.date = new Date();
+        this.date = GregorianCalendar.getInstance();
     }
 
     public int getNbParties(){
@@ -120,12 +121,16 @@ public class Ratio {
         String str = new Double(winrate).toString();
 
 
+        String[] tab = str.split(Pattern.quote("."));
         if(winrate%1 > 0) {
-            String[] tab = str.split(Pattern.quote("."));
 
             return tab[0] + ',' + tab[1].substring(0, 1)+"%";
         }
 
-        return str.substring(0,2)+"%";
+        return tab[0]+"%";
+    }
+
+    public boolean estPositif(){
+        return this.getNbVictoire() >= this.getNbDefaite();
     }
 }
