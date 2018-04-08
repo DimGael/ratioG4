@@ -3,6 +3,7 @@ package com.android.unilim.ratiog4.ratiog4.sqlite.ratio;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.regex.Pattern;
 
 public class Ratio {
     private long id;
@@ -112,5 +113,19 @@ public class Ratio {
 
     public int getNbParties(){
         return this.nbDefaite + this.nbVictoire;
+    }
+
+    public String getPourcentage() {
+        final double winrate = ((double)this.getNbVictoire()/(double)this.getNbParties())*100;
+        String str = new Double(winrate).toString();
+
+
+        if(winrate%1 > 0) {
+            String[] tab = str.split(Pattern.quote("."));
+
+            return tab[0] + ',' + tab[1].substring(0, 1)+"%";
+        }
+
+        return str.substring(0,2)+"%";
     }
 }

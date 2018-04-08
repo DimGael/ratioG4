@@ -3,7 +3,9 @@ package com.android.unilim.ratiog4.ratiog4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,8 +64,13 @@ public class StatActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.stats_nb_wins)).setText("W : "+ratioAnalyzer.getNbWins());
         ((TextView)findViewById(R.id.stats_nb_lose)).setText("L  : "+ratioAnalyzer.getNbLoses());
 
-        //Affichage du pourcentages de win
+        //Affichage du pourcentage de win
         ((TextView)findViewById(R.id.stats_pourcentage)).setText(ratioAnalyzer.getWinRate());
+
+        final ListView listView = (ListView)findViewById(R.id.stats_ratios);
+        listView.setAdapter(new RatioAdapter(this, this.ratiosJeu));
+        listView.addHeaderView((View)getLayoutInflater().inflate(R.layout.header_ratio,null));
+
     }
 
     @Override
@@ -78,6 +85,12 @@ public class StatActivity extends AppCompatActivity {
         super.onResume();
         this.jeuDataSource.open();
         this.ratioDataSource.open();
+
+        /*
+        final ListView listView = (ListView)findViewById(R.id.stats_ratios);
+        listView.addHeaderView(findViewById(R.id.header_ratio_layout));
+        listView.setAdapter(new RatioAdapter(this, this.ratiosJeu));
+        */
     }
 
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:gravity="center"
+    android:id="@+id/ligne_ratio_layout">
+
+
+    <TextView
+        android:id="@+id/ligne_ratio_date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="18/04/18" />
+
+    <View style="@style/separation_ratios_stats" />
+
+    <TextView
+        android:id="@+id/ligne_ratio_win"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="W: 26"
+        android:textColor="@color/colorWin"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ligne_ratio_lose"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="L: 15"
+        android:textColor="@color/colorLose"
+        android:textSize="20sp" />
+
+    <View style="@style/separation_ratios_stats" />
+
+    <TextView
+        android:id="@+id/ligne_ratio_winrate"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:textColor="@color/colorWin"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="55,2%" />
+
+
+</LinearLayout>
