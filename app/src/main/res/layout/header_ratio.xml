@@ -10,13 +10,9 @@
         android:text="Date"
         style="@style/titre_listView_ratio" />
 
-    <View style="@style/separation_ratios_stats" />
-
     <TextView
         style="@style/titre_listView_ratio"
         android:text="Ratio" />
-
-    <View style="@style/separation_ratios_stats" />
 
     <TextView
         style="@style/titre_listView_ratio"
