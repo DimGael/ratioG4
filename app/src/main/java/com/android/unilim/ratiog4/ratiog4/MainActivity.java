@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
         final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
-        viewJeux.setAdapter(new JeuAdapter(this, jeux, viewJeux));
+        viewJeux.setAdapter(new JeuAdapter(this, jeux));
 
         final Button bouton_ajouter_jeu = (Button)findViewById(R.id.bouton_ajouter_jeu);
         bouton_ajouter_jeu.setOnClickListener(this);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Jeu> jeux = this.jeuDataSource.getAllJeux();
 
         final ListView viewJeux = (ListView)findViewById(R.id.listViewJeux);
-        viewJeux.setAdapter(new JeuAdapter(this, jeux, viewJeux));
+        viewJeux.setAdapter(new JeuAdapter(this, jeux));
         super.onResume();
     }
 

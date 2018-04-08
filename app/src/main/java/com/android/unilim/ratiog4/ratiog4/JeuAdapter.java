@@ -29,13 +29,11 @@ public class JeuAdapter extends BaseAdapter {
     private final List<Jeu> jeux;
     private final Context context;
     private final LayoutInflater layoutInflater;
-    private final ListView listView;
 
-    public JeuAdapter(Context context, List<Jeu> jeux, ListView viewJeux){
+    public JeuAdapter(Context context, List<Jeu> jeux){
         this.context = context;
         this.jeux = jeux;
         this.layoutInflater = LayoutInflater.from(context);
-        this.listView = viewJeux;
     }
 
     @Override
@@ -97,7 +95,7 @@ public class JeuAdapter extends BaseAdapter {
 
                                 jeux.remove(position);
 
-                                listView.setAdapter(JeuAdapter.this);
+                                notifyDataSetChanged();
 
 
                             }
