@@ -85,12 +85,15 @@ public class JeuActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.bouton_creer_ratio :
-                final Intent intent = new Intent(this, RatioActivity.class);
-                intent.putExtra(KEY_ID_JEU, this.jeu.getId());
-                startActivity(intent);
+                final Intent intentRatioActivity = new Intent(this, RatioActivity.class);
+                intentRatioActivity.putExtra(KEY_ID_JEU, this.jeu.getId());
+                startActivity(intentRatioActivity);
                 break;
 
             case R.id.bouton_stats :
+                final Intent intentStatActivity =  new Intent(this, StatActivity.class);
+                intentStatActivity.putExtra(KEY_ID_JEU, this.jeu.getId());
+                startActivity(intentStatActivity);
                 break;
         }
     }

@@ -59,10 +59,10 @@ public class JeuAdapter extends BaseAdapter {
 
         convertView = layoutInflater.inflate(R.layout.ligne_jeu, null);
 
-        TextView titre_jeu = (TextView)convertView.findViewById(R.id.titre_jeu);
+        TextView titre_jeu = (TextView)convertView.findViewById(R.id.main_titre_jeu);
         titre_jeu.setText(jeu.getNom());
 
-        ImageView imageView=(ImageView)convertView.findViewById(R.id.image_jeu);
+        ImageView imageView=(ImageView)convertView.findViewById(R.id.main_image_jeu);
         imageView.getLayoutParams().height=150;
         imageView.getLayoutParams().width=150;
 

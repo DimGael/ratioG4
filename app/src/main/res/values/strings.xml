@@ -7,5 +7,5 @@
 
     <string name="boutonQuitter">Annuler</string>
     <string name="boutonValider">Enregistrer</string>
-    <string name="hint_commentaire">Votre commentaire : </string>
+    <string name="hint_commentaire">Votre commentaire : (100 caractères max) </string>
 </resources>

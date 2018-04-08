@@ -5,4 +5,8 @@
     <color name="colorAccent">#ff0011</color>
 
     <color name="colorBoutonJeuActivity">#c9c9c9</color>
+
+
+    <color name="colorWin">#13ae2f</color>
+    <color name="colorLose">#a10309</color>
 </resources>

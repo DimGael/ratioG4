@@ -97,6 +97,21 @@ public class RatioDataSource {
         return listeRatio;
     }
 
+    public List<Ratio> getAllRatioJeu(long idJeu){
+        Cursor cursor = this.database.query(TABLE_NOM, allColumns, this.COLONNE_ID_JEU + " = " + idJeu, null, null, null, null);
+
+        List<Ratio> listeRatio = new ArrayList<Ratio>();
+        while (cursor.moveToNext()) {
+            listeRatio.add(creerRatio(cursor));
+        }
+
+        cursor.close();
+
+        return listeRatio;
+    }
+
+
+
     public long ajouterRatio(Ratio ratio){
         return this.ajouterRatio(ratio, ratio.getIdJeu());
     }
