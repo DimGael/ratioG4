@@ -37,6 +37,9 @@ class ListRatioAnalyzer {
     }
 
     public String getWinRate(){
+        if(this.ratioList.size() == 0)
+            return "";
+
         final double winrate = ((double)this.getNbWins()/(double)this.getNbParties())*100;
         String str = new Double(winrate).toString();
 
@@ -47,6 +50,6 @@ class ListRatioAnalyzer {
             return tab[0] + ',' + tab[1].substring(0, 1)+"%";
         }
 
-        return str.substring(0,1)+"%";
+        return str.substring(0,2)+"%";
     }
 }
