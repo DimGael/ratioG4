@@ -40,63 +40,49 @@
         <ImageView
             android:id="@+id/stats_image_jeu"
             android:layout_width="60dp"
-            android:layout_height="84dp"
+            android:layout_height="116dp"
             android:layout_weight="1"
-            android:maxWidth="60dp" />
+            android:maxWidth="60dp"
+            android:contentDescription="Logo du jeu" />
 
-        <TableLayout
-            android:layout_width="65dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
+       <LinearLayout
+           android:layout_gravity="center"
+           android:gravity="center"
+           android:layout_width="100dp"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
 
-            android:paddingHorizontal="5dp">
+           <TextView
+               android:id="@+id/stats_nb_wins"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:text="W : 3045"
+               android:textAlignment="center"
+               android:textColor="@color/colorWin"
+               android:textSize="20sp"
+               android:layout_width="wrap_content" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center">
+           <TextView
+               android:id="@+id/stats_nb_lose"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:text="L  : 2562"
+               android:textAlignment="center"
+               android:textColor="@color/colorLose"
+               android:textSize="20sp"
+               android:layout_width="wrap_content" />
 
-                <TextView
-                    style="@style/stat_text_ratio"
-                    android:text="W :"
-                    android:textColor="@color/colorWin" />
 
-                <TextView
-                    android:id="@+id/stats_total_wins"
-                    style="@style/stats_nb_winlose"
-                    android:text="3461" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center">
-
-                <TextView
-                    style="@style/stat_text_ratio"
-                    android:text="L  :"
-                    android:textColor="@color/colorLose" />
-
-                <TextView
-                    android:id="@+id/stats_total_lose"
-                    style="@style/stats_nb_winlose"
-                    android:text="2508" />
-
-            </TableRow>
-
-        </TableLayout>
+       </LinearLayout>
 
         <TextView
             android:id="@+id/stats_pourcentage"
-            android:layout_width="55dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:maxWidth="75dp"
             android:text="58,5 %"
             android:textAlignment="center"
             android:textColor="@color/colorWin"

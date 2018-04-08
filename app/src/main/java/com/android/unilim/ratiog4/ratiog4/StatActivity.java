@@ -59,8 +59,8 @@ public class StatActivity extends AppCompatActivity {
         ((ImageView)findViewById(R.id.stats_image_jeu)).setImageURI(this.jeu.getUri_image());
 
         //Affichage du nombre de victoires et de défaites
-        //((TextView)findViewById(R.id.stats_total_wins)).setText(ratioAnalyzer.getNbWins());
-        //((TextView)findViewById(R.id.stats_total_lose)).setText(ratioAnalyzer.getNbLoses());
+        ((TextView)findViewById(R.id.stats_nb_wins)).setText("W : "+ratioAnalyzer.getNbWins());
+        ((TextView)findViewById(R.id.stats_nb_lose)).setText("L  : "+ratioAnalyzer.getNbLoses());
 
         //Affichage du pourcentages de win
         ((TextView)findViewById(R.id.stats_pourcentage)).setText(ratioAnalyzer.getWinRate());
