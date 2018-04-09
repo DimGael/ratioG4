@@ -1,11 +1,14 @@
 package com.android.unilim.ratiog4.ratiog4;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.Ratio;
 
@@ -74,8 +77,6 @@ public class RatioAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if(tv_commentaire.getVisibility() == View.VISIBLE){
                     tv_commentaire.setVisibility(View.GONE);
                     view.setBackgroundColor(context.getResources().getColor(R.color.ratioUnselected));
@@ -88,9 +89,42 @@ public class RatioAdapter extends BaseAdapter {
             }
         });
 
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setItems(new CharSequence[]{"Modifier Commentaire", "Partager ..."},
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int wich) {
+                                        switch (wich){
+                                            case 0:
+                                                modifierCommentaire();
+                                                break;
+                                            case 1:
+                                                partager();
+                                                break;
+                                        }
+                                    }
+                                })
+                        .create().show();
+                return false;
+            }
+        });
 
 
         return view;
+    }
+
+    private void partager() {
+        //TODO
+        Toast.makeText(context, "Partage en cours ...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void modifierCommentaire() {
+        //TODO
+        Toast.makeText(context, "Modification du commentaire", Toast.LENGTH_SHORT).show();
+
     }
 
     private String afficherDate(Calendar date) {
