@@ -71,7 +71,7 @@ public class StatActivity extends AppCompatActivity {
             tv_winrate.setTextColor(getResources().getColor(R.color.colorLose));
 
         final ListView listView = (ListView)findViewById(R.id.stats_ratios);
-        listView.setAdapter(new RatioAdapter(this, this.ratiosJeu));
+        listView.setAdapter(new RatioAdapter(this, this.ratiosJeu, this.jeu));
         listView.addHeaderView((View)getLayoutInflater().inflate(R.layout.header_ratio,null));
 
     }
@@ -88,12 +88,6 @@ public class StatActivity extends AppCompatActivity {
         super.onResume();
         this.jeuDataSource.open();
         this.ratioDataSource.open();
-
-        /*
-        final ListView listView = (ListView)findViewById(R.id.stats_ratios);
-        listView.addHeaderView(findViewById(R.id.header_ratio_layout));
-        listView.setAdapter(new RatioAdapter(this, this.ratiosJeu));
-        */
     }
 
 }

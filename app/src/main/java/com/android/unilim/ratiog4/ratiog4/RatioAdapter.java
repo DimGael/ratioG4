@@ -3,6 +3,7 @@ package com.android.unilim.ratiog4.ratiog4;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.Ratio;
 
 import org.w3c.dom.Text;
@@ -22,10 +24,12 @@ public class RatioAdapter extends BaseAdapter {
     private List<Ratio> ratios;
     private Context context;
     private LayoutInflater layoutInflater;
+    private Jeu jeu;
 
-    public RatioAdapter(Context context, List<Ratio> ratios){
+    public RatioAdapter(Context context, List<Ratio> ratios, Jeu jeu){
         this.context = context;
         this.ratios = ratios;
+        this.jeu = jeu;
         this.layoutInflater = LayoutInflater.from(context);
     }
 
@@ -93,7 +97,7 @@ public class RatioAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(View view) {
                 new AlertDialog.Builder(context)
-                        .setItems(new CharSequence[]{"Modifier Commentaire", "Partager ..."},
+                        .setItems(new CharSequence[]{"Modifier Commentaire", "Partager"},
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int wich) {
@@ -102,7 +106,7 @@ public class RatioAdapter extends BaseAdapter {
                                                 modifierCommentaire();
                                                 break;
                                             case 1:
-                                                partager();
+                                                partager(ratio, jeu.getNom());
                                                 break;
                                         }
                                     }
@@ -116,9 +120,11 @@ public class RatioAdapter extends BaseAdapter {
         return view;
     }
 
-    private void partager() {
-        //TODO
-        Toast.makeText(context, "Partage en cours ...", Toast.LENGTH_SHORT).show();
+    private void partager(Ratio ratio, String nomJeu) {
+        Intent intentShare = new Intent(Intent.ACTION_SEND);
+        intentShare.setType("text/plain");
+        intentShare.putExtra(Intent.EXTRA_TEXT, "Dans mes dernières game de "+nomJeu+" j'ai fait "+ratio.getNbVictoire()+" wins sur "+ratio.getNbParties()+" parties !");
+        context.startActivity(Intent.createChooser(intentShare, "Partager son ratio avec "));
     }
 
     private void modifierCommentaire() {
