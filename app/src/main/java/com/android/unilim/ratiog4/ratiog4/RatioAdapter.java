@@ -148,7 +148,7 @@ public class RatioAdapter extends BaseAdapter {
             mois = date.get(Calendar.MONTH)+"";
 
 
-        String annee = new Integer(date.get(Calendar.YEAR)).toString().substring(2);
+        String annee = Integer.valueOf(date.get(Calendar.YEAR)).toString().substring(2);
 
 
         return jour+"/"+mois+"/"+annee;
