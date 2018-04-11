@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.unilim.ratiog4.ratiog4.sqlite.jeu.Jeu;
 import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.Ratio;
-
-import org.w3c.dom.Text;
+import com.android.unilim.ratiog4.ratiog4.sqlite.ratio.RatioDataSource;
 
 import java.util.Calendar;
 import java.util.List;
@@ -103,7 +103,7 @@ public class RatioAdapter extends BaseAdapter {
                                     public void onClick(DialogInterface dialogInterface, int wich) {
                                         switch (wich){
                                             case 0:
-                                                modifierCommentaire();
+                                                modifierCommentaire(ratio);
                                                 break;
                                             case 1:
                                                 partager(ratio, jeu.getNom());
@@ -127,10 +127,56 @@ public class RatioAdapter extends BaseAdapter {
         context.startActivity(Intent.createChooser(intentShare, "Partager son ratio avec "));
     }
 
-    private void modifierCommentaire() {
-        //TODO
-        Toast.makeText(context, "Modification du commentaire", Toast.LENGTH_SHORT).show();
+    /**
+     * Méthode appeler lorsqu'on appuie longtemps sur un ratio et que l'on choisit modifier commentaire
+     * @param ratio
+     */
+    private void modifierCommentaire(final Ratio ratio) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        final View dialogView = inflater.inflate(R.layout.dialog_box_commentaire, null);
+        final EditText edt_comm = (EditText) dialogView.findViewById(R.id.stats_modifcomm_edit_text_commentaire);
 
+        edt_comm.setText(ratio.getCommentaire());
+
+        final Button bouton_annuler = (Button) dialogView.findViewById(R.id.stats_modifcom_annuler);
+        final Button bouton_valider = (Button) dialogView.findViewById(R.id.stats_modifcom_valider);
+
+
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setView(dialogView)
+                .setTitle("Modifier commentaire")
+                .setMessage("Modifier votre commentaire")
+                .create();
+
+        alertDialog.show();
+
+        bouton_valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validerModificationCommentaire(ratio, edt_comm.getText().toString());
+                alertDialog.cancel();
+                notifyDataSetChanged();
+            }
+        });
+
+        bouton_annuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+    }
+
+    private void validerModificationCommentaire(Ratio ratio, String nouv_commentaire) {
+        ratio.setCommentaire(nouv_commentaire);
+
+        final RatioDataSource dataSource = new RatioDataSource(context);
+        dataSource.open();
+
+        dataSource.modifier(ratio);
+
+        dataSource.close();
     }
 
     private String afficherDate(Calendar date) {
