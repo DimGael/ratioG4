@@ -33,6 +33,8 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_lose;
     private TextInputEditText commentaireEditText;
 
+    private static final long ID_RATIO_NON_ENREGISTRE = -1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
             this.ratio = this.ratioDataSource.getRatioEnCoursJeu(jeu.getId());
         }
         else
-            this.ratio = new Ratio(-1, 0, 0, jeu.getId());
+            this.ratio = new Ratio(ID_RATIO_NON_ENREGISTRE, 0, 0, jeu.getId());
 
 
         if(jeu == null) {
@@ -101,9 +103,8 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(ratio.getNbParties() != 0){
-                    sauvegarderRatioEnCours();
-                }
+                ratio.setCommentaire(editable.toString());
+                sauvegarderRatioEnCours();
             }
         });
     }
@@ -157,8 +158,6 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
 
-        if(!this.commentaireEditText.getText().toString().equals(""))
-            ratio.setCommentaire(this.commentaireEditText.getText().toString());
 
         sauvegarderRatioEnCours();
 
@@ -166,12 +165,12 @@ public class RatioActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void sauvegarderRatioEnCours() {
-        if(this.ratio.getId() != -1) {
-            //Si le ratio n'a pas encore été enregistré
+        if(this.ratio.getId() != ID_RATIO_NON_ENREGISTRE) {
+            //Si le ratio a déjà été enregistré, alors on le modifie
             this.ratioDataSource.modifier(ratio);
         }
         else {
-            //Si le ratio a déjà été enregistré, alors on le modifie
+            //Si le ratio n'a pas encore été enregistré
             this.ratio.setId(
                     this.ratioDataSource.ajouterRatio(ratio));
         }
