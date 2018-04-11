@@ -61,8 +61,8 @@ public class JeuAdapter extends BaseAdapter {
         titre_jeu.setText(jeu.getNom());
 
         ImageView imageView=(ImageView)convertView.findViewById(R.id.main_image_jeu);
-        imageView.getLayoutParams().height=150;
-        imageView.getLayoutParams().width=150;
+        imageView.getLayoutParams().height=50;
+        imageView.getLayoutParams().width=50;
 
         imageView.setImageURI(jeu.getUri_image());
 

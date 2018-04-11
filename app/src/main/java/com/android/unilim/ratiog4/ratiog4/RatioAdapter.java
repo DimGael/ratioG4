@@ -93,11 +93,18 @@ public class RatioAdapter extends BaseAdapter {
             }
         });
 
+        final String modif_comm;
+        if(ratio.aUnCommentaire())
+            modif_comm = "Modifier Commentaire";
+        else
+            modif_comm = "Ajouter un commentaire";
+
+
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 new AlertDialog.Builder(context)
-                        .setItems(new CharSequence[]{"Modifier Commentaire", "Partager"},
+                        .setItems(new CharSequence[]{modif_comm, "Partager"},
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int wich) {
